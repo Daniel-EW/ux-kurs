@@ -1,0 +1,499 @@
+/* Foundation */
+/* enkel reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Base */
+
+html {
+    font-size: 20px;
+}
+/* ändra bas i dokumentet */
+@media (min-width:600px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+body {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-family: serif;
+}
+
+h1, 
+h2,
+h3 {
+    font-family: sans-serif;
+    line-height: 1.1;
+}
+
+h1, 
+h2,
+h3,
+p {
+    margin: 1rem 0;
+}
+
+h1 + p,
+h2 + p,
+h3 + p {
+    margin-top: 0;
+}
+
+div > * {} /* bestämmer regler för alla barnelement i direkt anslutning till förälderelement */
+div + * {} /* bestämmer regler för syskonelement i direkt anslutning */
+
+/* gör bilder responsiva  */
+img {
+    display: block;     /* hjälper till ibland, ej helt nödvändig */
+    /*width: 100%;        /* fyller ut bilden till 100% av ytan oavsett storlek */
+    max-width: 100%;    /* fyller ut bilder till 100% av ytan om bildens storlek tillåter */
+    height: auto;
+}
+
+/* Modules */
+
+/*** UTILITY (hjälp-klasser) ***/
+.container {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+.p-0 {
+    padding: 0;
+}
+.p-1 {
+    padding: 1em;
+}
+.py-1 {
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+.px-1 {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+@media ( min-width: 600px ) {
+    .container {
+        max-width: 800px;
+    }
+    .flex-container {
+        flex-direction: row;
+    }
+    .grid-container {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+    }
+}
+/*** SITE LAYOUT ***/
+.site {
+    overflow: hidden;   /* tillåter inte objekt att flöda utanför vyn */
+}
+.site-header {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    /* padding: 2rem 1rem; */
+    background-color: rgba(255,0,0,0.3);
+}
+
+@media ( min-width: 600px ) {
+    .site-header {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .site-header > * { /* första nivån av barnelement */
+        flex-basis: 100%;
+        /* margin: 2rem; */
+    }
+
+    .site-header * { /* alla nivåer av barnelement */
+        /* margin: 2rem; */
+    }
+}
+
+.brand {
+    font-family: sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 100;
+    /* display: inline-block; */
+    /* padding: .5rem 1rem; */
+    /*border: .25rem solid #ffffff; /* 20px / 0.25 = 5px */
+    /*border-radius: .5rem; /* 20px / 0.5 = 10px */
+}
+@media (min-width:600px) {
+    .brand {
+        font-size: 3rem;
+    }
+}
+
+.brand a {
+    color: #ffffff;
+    text-decoration: none;
+
+    padding: .5rem 1rem;
+    border: .25rem solid #ffffff; /* 20px / 0.25 = 5px */
+    border-radius: .5rem; /* 20px / 0.5 = 10px */
+}
+
+@media (min-width:600px) {} /* denna query gör ändrignar på enheter med skärmbredd över 600px */
+@media (max-width:600px) {} /* denna query gör ändrignar på enheter med skärmbredd upp till 600px */
+
+.btn-toggle { /* knapp */
+    position: absolute;
+    top: 30%;
+    right: 1rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.site-navigation {
+    display: none;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: space-between;
+}
+.toggle-menu {
+    display: none;
+}
+.toggle-menu:checked + .site-navigation {
+    display: flex;
+    /* checkbox? */
+}
+
+@media (min-width:600px) {
+    .btn-toggle {
+        display: none;
+    }
+    .site-navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    }
+    .site-navigation a {
+        display: inline-block;
+        padding: 1em 1.5em;
+        padding-left: 1em;
+        background-color: rgba(180, 82, 65, 0.342);
+        text-decoration: none;
+    }
+}
+
+.site-main {}
+
+.site-footer {
+    /* padding: 2rem 1rem; */
+    background-color: rgba(255,0,0,0.5);
+}
+
+.site-header,
+.site-main section,
+.site-footer {
+    padding: 2rem 1rem;
+}
+
+@media (min-width:600px) {
+    .site-header,
+    .site-main section,
+    .site-footer {
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+    }
+}
+
+/*** HERO ***/
+.hero {
+    position: relative;
+
+    height: 60vh;
+    padding: 0;
+    background-color: rgba(0,255,0,0.3);
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    justify-content: center; /* justera i X-led */
+    align-items: flex-end; /* justera i Y-led */
+}
+.hero.front-page {
+    background-image: url(../images/snow.jpg);
+}
+.hero.contact {
+    background-image: url(../images/skyscrapers.jpg);
+}
+.hero .overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+
+}
+.hero.contact .overlay {
+    background-color: rgba(255,0,0,0.5);
+}
+.hero .container {
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    max-width: 800px;
+    text-align: center;
+
+    color: white;
+}
+
+.hero-title {}
+.hero-byline {}
+.hero-cta {
+    display: inline-block;
+    background-color: white;
+    color: black;
+    padding: 1em 2em;
+    text-decoration: none;
+
+}
+
+/*** POST LAYOUT ***/
+.post {}
+
+@media (min-width:600px) {
+    .post {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .post img {
+        width: 30%;
+        float: right;
+    }
+}
+
+.columns {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.col {
+    /* flex-basis: 100%; */
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 1rem;
+}
+@media (min-width: 500px) {
+    .columns {
+        flex-direction: row;
+    }
+    .col {
+        width: 50%;
+    }
+}
+
+@media (min-width: 700px) {
+    .col {
+        width: 25%;
+    }
+}
+
+.col:nth-of-type(1) {
+    background-color: rgba(255,0,0,0.3);
+    /* order: 2; */
+}
+.col:nth-of-type(2) {
+    background-color: rgba(0,255,0,0.3);
+    /* order: -1 */
+}
+.col:nth-of-type(3) {
+    background-color: rgba(0,0,255,0.3);
+    /* order: 1; */
+}
+.col img {
+    order: -1;
+    /* dra bilden 1rem utanför padding i boxen */ 
+    margin: -1rem -1rem 0 -1rem;
+    /* justera bildens maxbredd med summan av padding */
+    max-width: calc( 100% + 2rem );
+}
+
+@media (min-width: 600px) {
+    .columns {
+        flex-direction: row;
+        /* gap: 1rem; */
+    }
+
+    /* .col + .col {
+        margin-left: 1rem;
+    } */
+}
+
+/*** OM OSS (GRID) ***/
+
+.site-main {
+    min-height: 90vh;
+}
+
+.grid {
+    background-color: sandybrown;
+    margin: 2rem 0;
+    display: grid;
+    /* grid-template-areas: 
+    "A"
+    "B"; */
+
+    /* grid-auto-flow: column dense;
+    grid-auto-columns: 300px;
+    grid-auto-rows: 200px; */
+}
+
+@media (min-width:600px) {
+    .grid {
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(5, 100px);
+        /* grid-template-areas:
+        ". A . . ."
+        ". A . B B"
+        ". A . B B"
+        ". A . . ."
+        ". A . . ."
+        ; */
+
+        /* Justera objekten längs X och Y-axel i rutnätet */
+        /* justify-items: center;
+        align-items: center; */
+
+        /* För att anpassa innehållet inne i grid-container */
+        /* justify-content: center;
+        align-content: center; */
+
+        gap: 1rem;
+    }
+}
+
+.grid-box-1 {
+    background-color: rgba(0,0,255,0.3);
+    grid-column: 1 / 4;
+    grid-row: 1 / 4;
+    /* grid-area: A; */
+}
+.grid-box-2 {
+    background-color: rgba(0,255,0,0.3);
+    grid-column: 3 / span 3;
+    grid-row: 5 ;
+    /* grid-area: B; */
+}
+.grid-box-3 {
+    
+    grid-column: span 2;
+    grid-row: span 2;
+    background-color: rgba(255,0,0,0.3);
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+
+    justify-self: center;
+    align-self: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact .grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 3rem;
+}
+
+.hero.services {
+    display: grid;
+    grid-template-columns: 3rem 1fr 3fr 1.5rem 1.5rem ; /* 5 columner */
+    grid-template-rows: 1.5rem 3rem 3rem 1fr 3rem auto 3rem 1fr 3rem 3rem; /* 10 rader */
+    
+    min-height: 100vh;
+
+    background-image: url(../images/skyscrapers.jpg);
+    background-size: cover;
+    color: white;
+}
+
+
+
+.services .icon {
+    grid-column: 4;
+    grid-row: 2;
+}
+.services .byline {
+    grid-column: 2;
+    grid-row: 3;
+}
+.services .headline {
+    grid-column: 2;
+    grid-row: 5;
+    font-size: 1.2rem;
+}
+.services .content {
+    grid-column: 2;
+    grid-row: 6;
+}
+.services .btn {
+    grid-column: 2;
+    grid-row: 7;
+    }
+.services .link {
+    grid-column: 2;
+    grid-row: 9;
+}
+
+
+.product-grid .product {
+    background-color: #eee;
+}
+.product:first-of-type {
+    grid-column: span2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.products:first-of-type * {
+    grid-column: 2;
+}
+
+.product:first-of-type img {
+    
+}
+
+.product-grid .product-image {}
+.product-grid .product-title {}
+.product-grid .product-descrition {}
+.product-grid .product-link {
+    display: inline-block;
+    padding: .5em 1.5em;
+    text-decoration: none;
+    background-color: green;
+    font-weight: 700;
+    color: white;
+}
+
+/* Cosmetic */
